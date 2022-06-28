@@ -17,15 +17,15 @@
           </li>
         @endif
 
-        @if (Route::has('data_warga'))
+        @if (Route::has('warga'))
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('data_warga') }}">{{ __('Data Warga') }}</a>
+            <a class="nav-link" href="{{ route('warga') }}">{{ __('Warga') }}</a>
           </li>
         @endif
 
-        @if (Route::has('data_pelayan'))
+        @if (Route::has('pelayan'))
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('data_pelayan') }}">{{ __('Data Petugas') }}</a>
+            <a class="nav-link" href="{{ route('pelayan') }}">{{ __('Pelayan') }}</a>
           </li>
         @endif
 
@@ -53,14 +53,15 @@
           @endif
         @else
           <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" v-pre>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }}
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+              <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                                                                         document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
 

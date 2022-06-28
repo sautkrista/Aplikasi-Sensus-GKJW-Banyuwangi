@@ -7,19 +7,36 @@
 <!--<![endif]-->
 
 <head>
+  <!--CSS Link -->
   @include('layouts.top')
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 80px;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+  </style>
 </head>
 
 <body>
   <!-- Header-->
   @include('layouts.header')
   <!-- Header-->
+  <div class="mb-5">
+    @yield('content')
+  </div>
 
+  <!-- Footer -->
+  @include('layouts.footer')
 
-  @yield('content')
-
-
-  <!-- Right Panel -->
+  </ <!--JS Link -->
   @include('layouts.bottom')
 </body>
 

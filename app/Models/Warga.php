@@ -9,8 +9,15 @@ class Warga extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function krw()
     {
-        return $this->hasOne(Krw::class);
+        return $this->belongsTo(Krw::class);
+    }
+
+    public function sensus()
+    {
+        return $this->hasMany(Sensus::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\WartaJemaat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class WartaJemaatController extends Controller
      */
     public function index()
     {
-        return view("warta");
+        return view("guest.warta");
     }
 
     /**
@@ -22,21 +23,6 @@ class WartaJemaatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -44,42 +30,18 @@ class WartaJemaatController extends Controller
      * @param  \App\Models\WartaJemaat  $wartaJemaat
      * @return \Illuminate\Http\Response
      */
-    public function show(WartaJemaat $wartaJemaat)
+    public function show(Request $request)
     {
-        //
-    }
+        $data = WartaJemaat::where('gambar', 'like', '%' . $request->minggu . '%')->orderBy('halaman', 'ASC')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\WartaJemaat  $wartaJemaat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(WartaJemaat $wartaJemaat)
-    {
-        //
-    }
+        $date = Carbon::parse($request->minggu);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\WartaJemaat  $wartaJemaat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, WartaJemaat $wartaJemaat)
-    {
-        //
-    }
+        $weekNumber = $date->weekNumberInMonth;
+        $start = $date->startOfWeek()->format('d-m-Y');
+        $end = $date->endOfWeek()->format('d-m-Y');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WartaJemaat  $wartaJemaat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(WartaJemaat $wartaJemaat)
-    {
-        //
+        // dd($date);
+
+        return view('guest.warta_show', compact('data', 'start', 'end'));
     }
 }

@@ -9,8 +9,10 @@ class Krw extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function warga()
     {
-        return $this->belongsTo(Warga::class);
+        return $this->hasmany(Warga::class);
     }
 }

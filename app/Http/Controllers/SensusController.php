@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warga;
 use App\Models\Sensus;
+use App\Models\Periode;
+use App\Models\Quisioner;
 use Illuminate\Http\Request;
 
 class SensusController extends Controller
@@ -14,7 +17,7 @@ class SensusController extends Controller
      */
     public function index()
     {
-        return view("survei");
+        return view("guest.sensus");
     }
 
     /**
@@ -22,9 +25,17 @@ class SensusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data = Warga::where('nik', $request->nik)->get();
+        $periode = Periode::where('status', 1)->get();
+
+        // dd($periode);
+
+        $quisioner = Quisioner::where('periode_id', $periode[0]->id)->get();
+
+
+        return view('guest.sensus_create', compact('data', 'quisioner'));
     }
 
     /**
@@ -35,51 +46,41 @@ class SensusController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $all = $request->all();
+        $jawaban = [];
+        foreach ($all as $value) {
+            array_push($jawaban, $value);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sensus  $sensus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sensus $sensus)
-    {
-        //
-    }
+        array_shift($jawaban);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Sensus  $sensus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sensus $sensus)
-    {
-        //
-    }
+        // dd($jawaban);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sensus  $sensus
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Sensus $sensus)
-    {
-        //
-    }
+        $periode = Periode::where('status', 1)->get();
+        $quisioner = Quisioner::where('periode_id', $periode[0]->id)->get();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sensus  $sensus
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sensus $sensus)
-    {
-        //
+        if ($request->nik) {
+
+            foreach ($quisioner as $key => $soal) {
+                Sensus::create([
+                    'quisioner_id' => $soal->id,
+                    'warga_id' => $request->nik,
+                    'jawaban' => $jawaban[$key],
+                    'tanggal' => now()
+                ]);
+            }
+            return redirect()->route('sensus_warga');
+        } else {
+            $id = random_int(1000, 9999);
+            foreach ($quisioner as $key => $soal) {
+                Sensus::create([
+                    'quisioner_id' => $soal->id,
+                    'warga_id' => $id,
+                    'jawaban' => $jawaban[$key],
+                    'tanggal' => now()
+                ]);
+            }
+            return redirect()->route('sensus_warga');
+        }
     }
 }

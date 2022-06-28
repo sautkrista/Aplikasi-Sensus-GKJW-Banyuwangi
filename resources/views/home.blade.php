@@ -14,7 +14,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div style="width: 100%; height:100vh;">
-          <img src="{{ asset('image/default-img.png') }}" class="w-100 h-auto" alt="Gambar 1">
+          <img src="{{ asset('image/a.jpg') }}" class="w-100 h-auto" alt="Gambar 1">
         </div>
       </div>
       <div class="carousel-item">
@@ -48,7 +48,7 @@
             <div class="row">
 
               <div class="col-md-4">
-                <img src="{{ asset('image/default-img.png') }}" class="img-fluid rounded-start" alt="...">
+                <img src="{{ asset('image/logo-gkjw-png-Transparent-Images.png') }}" class="img-fluid rounded-start" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">

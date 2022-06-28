@@ -18,6 +18,7 @@ class CreatePeriodesTable extends Migration
             $table->Date("tanggal_mulai");
             $table->Date("tanggal_selesai");
             $table->String("deskripsi");
+            $table->Integer('status');
             $table->timestamps();
         });
     }
