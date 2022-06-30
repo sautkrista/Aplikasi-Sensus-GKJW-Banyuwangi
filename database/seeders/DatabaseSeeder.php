@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             'profesi' => 'freelancer',
             'asal_gereja' => 'banywuangi',
             'keterangan' => 'jemaat',
-            'status' => 'aktif',
+            'status' => 1,
             'krw_id' => 1
         ]);
 

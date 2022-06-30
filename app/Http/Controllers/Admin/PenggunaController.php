@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
 {
@@ -14,7 +18,8 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        return view('admin.pengguna.index');
+        $data = User::all();
+        return view('admin.pengguna.index', compact('data'));
     }
 
     /**
@@ -24,6 +29,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
+
         return view('admin.pengguna.create');
     }
 
@@ -35,7 +41,22 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string'],
+        ])->validate();
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role
+        ]);
+
+        return redirect('pengguna')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +78,8 @@ class PenggunaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::findOrFail($id);
+        return view('admin.pengguna.edit', compact('data'));
     }
 
     /**
@@ -69,7 +91,20 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string'],
+        ])->validate();
+
+        User::where('id', $id)
+            ->update([
+                'name' => $request->name,
+                'password' => Hash::make($request->password),
+                'role' => $request->role
+            ]);
+
+        return redirect('pengguna')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -80,6 +115,8 @@ class PenggunaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return redirect('pengguna')->with('success', 'Data Berhasil Dihapus');
     }
 }

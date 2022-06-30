@@ -22,16 +22,18 @@
   @include('layouts.admin.sidebar')
   <!-- Sidebar -->
 
-
-
-  <!-- Header-->
-  @include('layouts.admin.header')
-  <!-- Header-->
-
   <div class="container-fluid">
-    <div style="margin-top: 90px;">
+    <!-- Header-->
+    @include('layouts.admin.header')
+    <!-- Header-->
+
+    <div style="margin-top: 90px;" class="row">
+      @include('component.flash-message')
+    </div>
+    <div class="row">
       @yield('content')
     </div>
+  </div>
   </div>
 
 

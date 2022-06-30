@@ -15,7 +15,7 @@ class CreateWargasTable extends Migration
     {
         Schema::create('wargas', function (Blueprint $table) {
             $table->id();
-            $table->String("nik");
+            $table->String("nik")->unique();
             $table->String("nama");
             $table->String("jenis_kelamin");
             $table->String("tempat_lahir");
@@ -25,14 +25,14 @@ class CreateWargasTable extends Migration
             $table->String("kota_domisili");
             $table->String("no_telp");
             $table->String("tempat_baptis");
-            $table->Date("tanggal_baptis");
+            $table->Date("tanggal_baptis")->nullable();
             $table->String("tempat_sidi");
-            $table->Date("tanggal_sidi");
+            $table->Date("tanggal_sidi")->nullable();
             $table->Date("tanggal_nikah")->nullable();
             $table->String("profesi");
             $table->String("asal_gereja");
             $table->String("keterangan");
-            $table->String("status");
+            $table->String("status")->default(0);
             $table->unsignedBigInteger("krw_id");
             $table->timestamps();
         });

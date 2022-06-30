@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::resource('pengguna', PenggunaController::class);
+    Route::resource('pengguna', PenggunaController::class)->except('show');
     Route::resource('data-warga', WargaController::class);
     Route::resource('data-pelayan', PelayanController::class);
     Route::resource('data-warta', WartaController::class);

@@ -30,6 +30,8 @@
   @include('layouts.header')
   <!-- Header-->
   <div class="mb-5">
+    @include('component.flash-message')
+
     @yield('content')
   </div>
 

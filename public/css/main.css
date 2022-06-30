@@ -21,6 +21,7 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: 0.5s;
+    background-color: #f8fafc !important;
 }
 a {
     text-decoration: none !important;
@@ -54,7 +55,8 @@ a {
     margin-right: 0;
 }
 .header_img img {
-    width: 40px;
+    height: 40px;
+    width: auto;
 }
 
 .header_text {
