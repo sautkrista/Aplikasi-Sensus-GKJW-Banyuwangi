@@ -15,7 +15,7 @@ class CreateWartaJemaatsTable extends Migration
     {
         Schema::create('warta_jemaats', function (Blueprint $table) {
             $table->id();
-            $table->String("gambar");
+            $table->String("minggu");
             $table->String("halaman");
             $table->timestamps();
         });

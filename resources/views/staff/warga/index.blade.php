@@ -4,8 +4,16 @@
   {{-- Datatable --}}
   <div class="container">
     <div class=" card mb-3">
-      <div class="card-header">{{ __('Data Warga') }}
-        <a class="btn btn-sm btn-primary float-end" href="{{ route('data-warga.create') }}"> Tambah</a>
+      <div class="card-header">
+        <div class="row d-flex justify-space-between">
+          <div class="col-md-2">
+            {{ __('Data Warga') }}
+          </div>
+          <div class="col-md-10 d-flex justify-content-end">
+            <a class="btn btn-sm btn-info text-white me-3" href="{{ route('data-krw.index') }}"> Data KRW</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('data-warga.create') }}"> Tambah</a>
+          </div>
+        </div>
       </div>
 
       <div class="card-body">
@@ -33,7 +41,8 @@
                   <div class="d-flex justify-content-center align-items-center">
                     <a class="btn btn-sm btn-info mx-2 text-light" href="{{ route('data-warga.show', $warga->id) }}">
                       <i class="fa-solid fa-eye"></i> Detail</a>
-                    <a class="btn btn-sm btn-warning mx-2 text-light" href="{{ route('data-warga.edit', $warga->id) }}">
+                    <a class="btn btn-sm btn-warning mx-2 text-light"
+                      href="{{ route('data-warga.edit', $warga->id) }}">
                       <i class="fa-solid fa-pen-to-square"></i> Ubah</a>
                     <form class="d-flex mx-2" action="{{ route('data-warga.destroy', $warga->id) }}" method="post"
                       onsubmit="return confirm('Yakin hapus data ?')">

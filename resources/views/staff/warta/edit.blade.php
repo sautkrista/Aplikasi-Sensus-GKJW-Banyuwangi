@@ -4,19 +4,20 @@
   {{-- Datatable --}}
   <div class="container">
     <div class=" card mb-3">
-      <div class="card-header">{{ __('Tambah Pelayan') }}</div>
+      <div class="card-header">{{ __('Tambah Warta') }}</div>
 
       <div class="card-body">
-        <form method="POST" action="{{ route('data-pelayan.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('data-warta.update', $data->id) }}" enctype="multipart/form-data">
           @csrf
+          @method('PATCH')
           <div class="row mb-3">
             <div class="col">
               <div class="form-group">
-                <label for="nama" class="mb-1">{{ __('Nama') }}</label>
-                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror"
-                  name="nama" value="{{ old('nama') }}" autocomplete="nama" autofocus>
+                <label for="minggu" class="mb-1">{{ __('Minggu') }}</label>
+                <input id="minggu" type="week" class="form-control datepicker @error('minggu') is-invalid @enderror"
+                  name="minggu" value="{{ $data->minggu ? $data->minggu : old('minggu') }}" autofocus>
 
-                @error('nama')
+                @error('minggu')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -28,11 +29,12 @@
           <div class="row mb-3">
             <div class="col">
               <div class="form-group">
-                <label for="jabatan" class="mb-1">{{ __('Jabatan') }}</label>
-                <input id="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror"
-                  name="jabatan" value="{{ old('jabatan') }}" autocomplete="jabatan" autofocus>
+                <label for="halaman" class="mb-1">{{ __('halaman') }}</label>
+                <input id="halaman" type="text" class="form-control @error('halaman') is-invalid @enderror"
+                  name="halaman" value="{{ $data->halaman ? $data->halaman : old('halaman') }}" autocomplete="halaman"
+                  autofocus>
 
-                @error('jabatan')
+                @error('halaman')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -60,7 +62,7 @@
           <div class="row mb-3">
             <div class="col d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
-                {{ __('Tambah') }}
+                {{ __('Ubah') }}
               </button>
             </div>
           </div>

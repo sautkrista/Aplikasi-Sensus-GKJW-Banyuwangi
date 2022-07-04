@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\PenggunaController;
-use App\Http\Controllers\Staff\PelayanController;
-use App\Http\Controllers\Staff\PeriodeController;
-use App\Http\Controllers\Staff\QuisionerController;
-use App\Http\Controllers\Staff\SensusController;
-use App\Http\Controllers\Staff\WargaController;
-use App\Http\Controllers\Staff\WartaController;
 use App\Models\Warga;
 use App\Models\Pelayan;
 use App\Models\WartaJemaat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Staff\KrwController;
+use App\Http\Controllers\Staff\WargaController;
+use App\Http\Controllers\Staff\WartaController;
+use App\Http\Controllers\Staff\SensusController;
+use App\Http\Controllers\Staff\PelayanController;
+use App\Http\Controllers\Staff\PeriodeController;
+use App\Http\Controllers\Admin\PenggunaController;
+use App\Http\Controllers\Staff\QuisionerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pengguna', PenggunaController::class)->except('show');
     Route::resource('data-warga', WargaController::class);
-    Route::resource('data-pelayan', PelayanController::class);
+    Route::resource('data-krw', KrwController::class)->except('show');
+    Route::resource('data-pelayan', PelayanController::class)->except('show');
     Route::resource('data-warta', WartaController::class);
     Route::resource('periode', PeriodeController::class);
     Route::resource('quisioner', QuisionerController::class);

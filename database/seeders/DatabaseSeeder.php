@@ -8,6 +8,7 @@ use App\Models\Warga;
 use App\Models\Pelayan;
 use App\Models\Periode;
 use App\Models\Quisioner;
+use App\Models\WartaJemaat;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -72,9 +73,29 @@ class DatabaseSeeder extends Seeder
             'jabatan' => 'Pendeta',
         ]);
 
-        Pelayan::create([
-            'nama' => 'Julius',
-            'jabatan' => 'Petugas',
+        WartaJemaat::create([
+            'minggu' => '2022-W26',
+            'halaman' => '1',
+        ]);
+
+        WartaJemaat::create([
+            'minggu' => '2022-W26',
+            'halaman' => '2',
+        ]);
+
+        WartaJemaat::create([
+            'minggu' => '2022-W26',
+            'halaman' => '3',
+        ]);
+
+        WartaJemaat::create([
+            'minggu' => '2022-W27',
+            'halaman' => '1',
+        ]);
+
+        WartaJemaat::create([
+            'minggu' => '2022-W27',
+            'halaman' => '2',
         ]);
 
         Periode::create([

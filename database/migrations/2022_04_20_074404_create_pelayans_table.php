@@ -17,6 +17,7 @@ class CreatePelayansTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('jabatan');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

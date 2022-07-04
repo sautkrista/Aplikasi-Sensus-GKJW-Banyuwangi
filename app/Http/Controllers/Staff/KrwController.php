@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Staff;
 
+use App\Models\Krw;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Pelayan;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\File;
 
-class PelayanController extends Controller
+class KrwController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class PelayanController extends Controller
      */
     public function index()
     {
-        $data = Pelayan::all();
-        return view('staff.pelayan.index', compact('data'));
+        $data = Krw::all();
+        return view('staff.krw.index', compact('data'));
     }
 
     /**
@@ -28,7 +27,7 @@ class PelayanController extends Controller
      */
     public function create()
     {
-        return view('staff.pelayan.create');
+        return view('staff.krw.create');
     }
 
     /**
@@ -40,18 +39,15 @@ class PelayanController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'nama' => ['required', 'string', 'max:255'],
-            'jabatan' => ['required', 'string', 'max:255'],
-            'foto' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
+            'nama_krw' => ['required', 'string', 'max:255'],
+            'ketua_krw' => ['required', 'string', 'max:255'],
         ])->validate();
 
         // dd($data);
-        $validated['foto'] = $request->nama . '.' . $request->foto->extension();
-        $request->foto->move(public_path('image/pelayan'), $validated['foto']);
 
-        Pelayan::create($validated);
+        Krw::create($request->all());
 
-        return redirect('data-pelayan')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('data-krw')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -62,7 +58,6 @@ class PelayanController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -73,8 +68,8 @@ class PelayanController extends Controller
      */
     public function edit($id)
     {
-        $data = Pelayan::findOrFail($id);
-        return view('staff.pelayan.edit', compact('data'));
+        $data = Krw::findOrFail($id);
+        return view('staff.krw.edit', compact('data'));
     }
 
     /**
@@ -87,21 +82,16 @@ class PelayanController extends Controller
     public function update(Request $request, $id)
     {
         $validated = Validator::make($request->all(), [
-            'nama' => ['required', 'string', 'max:255'],
-            'jabatan' => ['required', 'string', 'max:255'],
-            'foto' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
+            'nama_krw' => ['required', 'string', 'max:255'],
+            'ketua_krw' => ['required', 'string', 'max:255'],
         ])->validate();
 
-        if ($request->foto) {
-            $validated['foto'] = $request->nama . '.' . $request->foto->extension();
-            $request->foto->move(public_path('image/pelayan'), $validated['foto']);
-        } else {
-        }
+        // dd($validated);
 
-        Pelayan::where('id', $id)
+        Krw::where('id', $id)
             ->update($validated);
 
-        return redirect('data-pelayan')->with('success', 'Data Berhasil Diubah');
+        return redirect('data-krw')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -112,10 +102,8 @@ class PelayanController extends Controller
      */
     public function destroy($id)
     {
-        $data = Pelayan::find($id);
-        File::delete(public_path('/image/pelayan/' . $data->foto));
+        $data = Krw::find($id);
         $data->delete();
-
-        return redirect('data-pelayan')->with('success', 'Data Berhasil Dihapus');
+        return redirect('data-krw')->with('success', 'Data Berhasil Dihapus');
     }
 }

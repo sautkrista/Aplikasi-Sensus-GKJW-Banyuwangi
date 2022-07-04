@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
 
           @forelse ($data as $petugas)
-            <div class="col-2 mb-4">
+            <div class="col-2 mb-6">
               <div class="card">
                 <img src="{{ asset('image/default-user.png') }}" class="card-img-top" alt="user">
                 <div class="card-body text-center">

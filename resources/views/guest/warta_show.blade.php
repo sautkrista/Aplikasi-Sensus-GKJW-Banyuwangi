@@ -24,26 +24,14 @@
                 data-bs-slide-to="{{ $loop->iteration }}" class="active" aria-current="true"
                 aria-label="Slide {{ $loop->iteration }}"></button>
             @endforeach
-
-            {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-              aria-label="Slide 3"></button> --}}
           </div>
           <div class="carousel-inner">
             @foreach ($data as $warta)
               <div class="carousel-item {{ $loop->iteration == 1 ? 'active' : '' }}">
-                <img src="{{ asset('image/' . $warta->gambar . '.png') }}" class="w-100 h-auto"
-                  alt="{{ $warta->gambar . ' halaman ' . $warta->halaman }}">
+                <img src="{{ asset('image/warta/' . $warta->gambar . '-' . $warta->halaman . '.png') }}"
+                  class="w-100 h-auto" alt="{{ $warta->gambar . ' halaman ' . $warta->halaman }}">
               </div>
             @endforeach
-
-            {{-- <div class="carousel-item">
-              <img src="{{ asset('image/default-img.png') }}" class="w-100 h-auto" alt="Gambar 2">
-            </div>
-            <div class="carousel-item">
-              <img src="{{ asset('image/default-img.png') }}" class="w-100 h-auto" alt="Gambar 3">
-            </div> --}}
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">

@@ -27,16 +27,17 @@
       </div>
     </div>
   @elseif (Auth::user()->role == 'staff')
-    <a href="{{ route('data-warga.index') }}" class="nav_link {{ Request::is('warga*') ? 'active' : '' }}"> <i
+    <a href="{{ route('data-warga.index') }}"
+      class="nav_link {{ Request::is('data-warga*', 'data-krw*') ? ' active' : '' }}"> <i
         class='fa-solid fa-users'></i>
       <span class="nav_name">Data Warga</span>
     </a>
-    <a href="{{ route('data-pelayan.index') }}" class="nav_link {{ Request::is('pelayan*') ? 'active' : '' }}"> <i
-        class='fa-solid fa-id-card'></i>
+    <a href="{{ route('data-pelayan.index') }}" class="nav_link {{ Request::is('data-pelayan*') ? 'active' : '' }}">
+      <i class='fa-solid fa-id-card'></i>
       <span class="nav_name">Data Pelayan</span>
     </a>
-    <a href="{{ route('data-warta.index') }}" class="nav_link {{ Request::is('warta*') ? 'active' : '' }}"> <i
-        class='fa-solid fa-newspaper'></i>
+    <a href="{{ route('data-warta.index') }}" class="nav_link {{ Request::is('data-warta*') ? 'active' : '' }}">
+      <i class='fa-solid fa-newspaper'></i>
       <span class="nav_name">Warta Jemaat</span>
     </a>
     <a href="{{ route('quisioner.index') }}" class="nav_link {{ Request::is('quisioner*') ? 'active' : '' }}">
